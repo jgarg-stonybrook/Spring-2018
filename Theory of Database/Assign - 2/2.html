@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+  <title>Assignment 2</title>
+</head>
+  <body lang="EN" bgcolor="#e5e5ff">
+<h1 align="Center">CSE 532 Assignment #2</h1>
+<h3 align="Center">Due Monday, February 12, 2018 (11:59 pm).</h3>
+<br>
+<ul>
+<li> Do it in groups of TWO (or one, if you wish), but upload only ONE SUBMISSION PER GROUP (write both names on the submission). </li>
+<li> 
+Upload a SINGLE .pdf via Blackboard. Your submission need not be typewritten---uploading a scan of handwritten work is perfectly fine. </li>
+<li> Beyond your group, you are not allowed to
+discuss the problem with other classmates.  Neither are you allowed to
+refer to any other resource (online, any book other than our textbook,
+etc). However, you are welcome to discuss (over email or in person)
+with me (or TA) -- I will glady guide you appropriately.</li>
+<br>
+<hr>
+<h3>Problem Set (100 points)</h3>
+<ol>
+<li> (30 points) Let us consider the following relations/predicates:
+<br>
+    <ul>
+      <li>Courses(<u>number</u>, quarter, instructor)</li>
+      <li>       Prereqs(<u>course</u>, <u>prerequisite</u>)</li>
+      <li>       Students(<u>id</u>, name, address)</li>
+      <li>       Enrolls(<u>studentID</u>, <u>course</u>, quarter, grade)</li>
+    </ul>
+Note that courses are represented by their unique numbers in relations
+Prereqs and Enrolls; students are represented by their ID's.  Prereqs
+table contains only direct prerequisite.  For example, if CS101 is a
+prerequisite of CS200, and CS200 is a prerequisite of CS342, then only
+the pairs (CS200, CS101) and (CS342, CS200) would appear in
+Prereqs. We refer to CS101 as an indirect prerequisite of CS342. A prerequisite is considered satisfied only if the students gets an A or A- grade in the course.
+  <ol type="a">
+<li> Write a datalog program that finds all (student, course, quarter) triplets (x,y,q) such that x enrolls in y in quarter q but did not satisfy (i.e., didn't enrol or enrolled but got a B+ or lower grade) one or more of y's direct/indirect prerequisites in a <b>prior</b> quarter. In other words, you are trying to create a table of "violations"; a triplet is a violation if either a direct or an indirect prerequisite of a course has not been satisfied in a prior quarter. See #4 below for an example.</li>
+  </ol>
+</li>
+
+<li> (40 points)
+Consider a database for the Paris Metro and Bus lines, consisting of two relations 
+<i>Metro(Station, Next)</i> and <i>Bus(Station, Next)</i>. Write the following questions in Datalog:
+
+<ol type="a">
+<li>
+Find pairs of stations <i>(m,n)</i>, such that <i>m</i> can be reached
+from <i>n</i> by a bus path (using only buses) AND a metro path (using
+only metros).
+</li>
+<li> 
+We say that the metro is useless in a bus path from <i>m</i> to
+<i>n</i> if by taking the metro at any intermediate point <i>k</i> one
+can return to <i>k</i>, but not reach any other (intermediate) station
+along the path. Find the pair of stations <i>(m,n)</i> such that the
+metro is useless in all the bus paths connecting <i>m</i>
+and <i>n</i>.
+</li>
+</ol>
+
+<li>(30 points) Suppose we have EDB relations: <i>frequents(Drinker, Bar)</i>
+    , serves(Bar, Beer), and likes(Drinker, Beer). The relations have obvious
+  meanings. Define the following predicates using safe datalog rules.   
+         
+    <ol type="a">
+      <li><i>veryHappy(D)</i> if every bar that drinker<i> D</i> frequents 
+ serves at least one beer he likes. You may assume that every drinker frequents 
+ at least one bar.</li>
+      <li><i>sad(D)</i> if drinker <i>D</i> frequents all bars that serve
+no beer he likes.</li>
+    </ol>
+  </li>
+
+<li> (ZERO points) This is purely optional (no extra credit either). You can play around with some datalog queries and examples in XSB. See <a href="https://www.dropbox.com/s/rvqbztwn643m1hs/xsb-instructions.html?dl=0">XSB Instructions</a> and <a href="https://www.dropbox.com/s/m3bjqerk8h3sxwp/2-tables.txt?dl=0">input tables</a>. The input tables also contains an example for #1.
+</li>
+
+
+    </ol>
+    </body>
+    </html>

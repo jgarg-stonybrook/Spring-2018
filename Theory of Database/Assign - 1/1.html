@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+  <title>Assignment 1</title>
+</head>
+  <body lang="EN" bgcolor="#e5e5ff">
+<h1 align="Center">CSE 532 Assignment #1</h1>
+<h3 align="Center">Due 31st January, 11:59pm.</h3>  
+<ul>
+<li> Do it in groups of TWO (or one, if you wish), but upload only ONE SUBMISSION PER GROUP (write both names on the submission). </li>
+<li> 
+Upload a SINGLE .pdf via Blackboard. Your submission need not be typewritten---uploading a scan of handwritten work is perfectly fine. </li>
+<li> Beyond your group, you are not allowed to
+discuss the problem with other classmates.  Neither are you allowed to
+refer to any other resource (online, any book other than our textbook,
+etc). However, you are welcome to discuss (over email or in person)
+with me (or TA) -- I will glady guide you appropriately.</li>
+<br>
+<hr>
+<h3>Problem Set (100 points)</h3>
+<ol>
+
+<li>
+<b> (30 points) </b>
+Consider the tables Frequents(drinker, bar), Likes(drinker, beer), 
+Sells(bar, beer), with the following meanings: A tuple (d,b) in Frequents
+means that d frequents the bar b, a tuple (d,b) in Likes means that d likes
+the beer b, and a tuple (B,b) in Sells means that the bar B sells the beer
+b.  Assume the tables do not have any duplicates.
+
+Answer the following queries in Relational Algebra.  Do not use the aggregate
+operator.
+
+<ul>
+<li>
+Find pairs of drinkers that frequent the SAME SET of bars. 
+</li>
+<li>
+A beer is called "popular" if it is sold by at least 4 different bars.
+Find drinkers that like all the popular beers.
+</li>
+<li>
+We say that a bar b is redundant if there exists a bar b1 such that
+(i) b1 sells all the beers that b sells, and (ii) All the drinkers
+that frequent b <i>and</i> like some beer that b sells, also frequent b1.
+Find all redundant bars.
+</li>
+</ul>
+
+<p>
+<li>
+<b> (10 points) </b>
+Consider the following two queries over R(a,c) and S(a,b).
+
+<pre>
+Q1:
+Select  r.a, r.c
+From    R r
+Where   NOT EXISTS (Select s.a
+                   From  S s
+                   Where s.b > '4' and r.a = s.a)
+
+Q2:
+Select  r.a, r.c
+From    R r,  (select distinct S.a, S.b From  S) s
+Where   NOT (r.a = s.a and s.b > '4')
+</pre>
+
+<ul>
+<li>
+Give a relational algebra expression that is equivalent to Q1. Assume bag semantics, i.e.,
+assume that the relational algebra operators are bag operators. 
+</li>
+<li>
+Are Q1 and Q2 equivalent (return the same bags, i.e, same tuples with the same number of 
+duplicates)?  If yes, PROVE it.  If not, show a counter example.
+</li>
+</ul>
+</li>
+<p>
+<li>
+<b> (10 points) </b>
+Consider the following two queries over R(a,b) and S(b,c).
+<pre>
+Q1:        SELECT   A
+           FROM     R NATURAL JOIN S
+           GROUPBY  A
+           HAVING   COUNT(*) < 2
+
+Q2:        SELECT   A
+           FROM     R
+           WHERE    B NOT IN (SELECT   B
+                              FROM     S
+                              GROUPBY  B
+                              HAVING   COUNT(*) > 1)
+
+</pre>
+
+Treating Q1 and Q2 as multisets (bags), which one of the following is true?
+Prove your answer (perhaps, by using a counter example or otherwise).
+<pre>
+. Q1 and Q2 always produce the same answer for all databases.
+. The answer to Q1 is always contained in the answer to Q2 for all databases.
+. The answer to Q2 is always contained in the answer to Q1 for all databases.
+. None of the above.
+</pre>
+</li>
+
+<p>
+<li>
+<b> (50 points) </b>
+Do the following exercises from the textbook. 
+<ul>
+<li>
+2.4.1 (i). Note that you can't use the aggregate operator here.
+</li>
+<li>
+2.4.10.
+</li>
+<li>
+6.3.1 (f). 
+</li>
+<li>
+6.3.6. 
+</li>
+<li>
+6.4.6 (j).
+</li>
+</ul>
+</li>
+</ol>
+</body>
+</html>
