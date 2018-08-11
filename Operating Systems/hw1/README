@@ -1,0 +1,44 @@
+XXX: fill in
+
+Explanation of Logic : 
+1.) If any of of infile is not provided, error is returned.
+2.) Arguments are validated at different stages.
+3.)	After this I have checked that the files are regular and they should
+	not be directory
+4.) In P, if outfile is same as infile, the error is returned.
+5.) Then it is checked that files are already hard linked.
+6.) Checking hardlink serves many purpose as if only p is given then
+	we dont need to compare the 2 infiles before writing in outfile.
+	So we have directly read and write in outfile without comparing.
+7.) In hardlinked if no option is given, then we return error.
+8.) In hardlinked if n and p are given then we directly return size of 
+	one file.
+9.) After this the permissions, owners etc are compared for both files.
+	If p is not given, then program is returned from this because the 
+	permissions etc should be same in this case.
+10.) After this if n and p both are given, then we match the starting 
+	 bytes of both files and return them.
+11.) If only p is given then we go for partial checking and writing.
+12.) Else the size of both files are checked. If they are not equal 
+	 we return error.
+13.) Else we go for complete checking and then they should be same 
+	 completely.
+14.) One thing is that we are not writing directly in output file.
+	 We first write in temp file and if successful if just unlink outfile
+	 and then rename temp file. else the tempfile is unlinked.
+
+
+EXTRA CREDIT :
+	The symlinks are handled for all the files.
+	The path is followed for symlinks and all the operations are performed
+	on actual file that we get after following the path.
+	If infile1 or infile2 are same to outfile after following symlink, the 
+	we return an error.
+
+	For calculating, SHA if -s flag is given, it overrides all flags.
+	Output is written in outfile and 0 is returned as answer.
+
+References:
+	https://elixir.bootlin.com/linux/v4.6/
+	Linux manpages for different functions.
+	https://github.com/torvalds/linux

@@ -1,0 +1,91 @@
+Part A Question 1
+Total TCP Flows Initiated from Seneder 130.245.145.12 are: 3
+
+Max Segment Size for TCP connections
+MSS for  43498  is :  1460
+MSS for  43500  is :  1460
+MSS for  43502  is :  1460
+
+Part A Question 2.a (Client (Syn, Ack), Server(Syn, Ack)
+For TCP Connection: 43498
+Syn = 1 Ack = 1 Syn = 1 Ack = 25
+Receive Window Size:  Src = 49152  Dst = 49152
+
+Syn = 25 Ack = 1 Syn = 1 Ack = 1473
+Receive Window Size:  Src = 49152  Dst = 49152
+
+For TCP Connection: 43500
+Syn = 1 Ack = 1 Syn = 1 Ack = 25
+Receive Window Size:  Src = 49152  Dst = 49152
+
+Syn = 25 Ack = 1 Syn = 1 Ack = 1473
+Receive Window Size:  Src = 49152  Dst = 49152
+
+For TCP Connection: 43502
+Syn = 1 Ack = 1 Syn = 1 Ack = 25
+Receive Window Size:  Src = 49152  Dst = 49152
+
+Syn = 25 Ack = 1 Syn = 1 Ack = 1473
+Receive Window Size:  Src = 49152  Dst = 49152
+
+Part A Question 2.b
+Total Empirical Throughput(KB/Sec) for 43498 TCP Connection is : 5126.110249659843
+Total Empirical Throughput(KB/Sec) for 43500 TCP Connection is : 1238.5834852424985
+Total Empirical Throughput(KB/Sec) for 43502 TCP Connection is : 1446.705854389101
+
+Part A Question 2.c
+Total Loss Rate(lost/total) for 43498 TCP Connection is : 0.0004299842339114232
+Total Loss Rate(lost/total) for 43500 TCP Connection is : 0.013299377475947935
+Total Loss Rate(lost/total) for 43502 TCP Connection is : 0.0
+
+Part A Question 2.d
+Average RTT(secs) for 43498 TCP Connection is : 0.07354583678398728
+Average RTT(secs) for 43500 TCP Connection is : 0.07375813241380343
+Average RTT(secs) for 43502 TCP Connection is : 0.07327938239489283
+
+Part B Question 1
+Format : Window Size BY Packets, Window Size BY Bytes
+Congestion windows for 43498 TCP Flow :
+Congestion Window : 10 13716
+Congestion Window : 20 30280
+Congestion Window : 33 49962
+Congestion Window : 45 68130
+Congestion Window : 67 101438
+Congestion Window : 100 151400
+Congestion Window : 135 204390
+Congestion Window : 203 307342
+Congestion Window : 271 410294
+Congestion Window : 407 616198
+
+Congestion windows for 43500 TCP Flow :
+Congestion Window : 10 13716
+Congestion Window : 20 30280
+Congestion Window : 33 49962
+Congestion Window : 45 68130
+Congestion Window : 67 101438
+Congestion Window : 100 151400
+Congestion Window : 135 204390
+Congestion Window : 203 307342
+Congestion Window : 271 410294
+Congestion Window : 407 616198
+
+Congestion windows for 43502 TCP Flow :
+Congestion Window : 10 13716
+Congestion Window : 20 30280
+Congestion Window : 33 49962
+Congestion Window : 45 68130
+Congestion Window : 66 99924
+Congestion Window : 89 134746
+Congestion Window : 135 204390
+Congestion Window : 181 274034
+
+Part B Question 2
+Number of Fast Retransmission for Port 43498 : 2
+Number of Retransmission(Timeout) for Port 43498 : 1
+
+Number of Fast Retransmission for Port 43500 : 3
+Number of Retransmission(Timeout) for Port 43500 : 91
+
+Number of Fast Retransmission for Port 43502 : 0
+Number of Retransmission(Timeout) for Port 43502 : 0
+

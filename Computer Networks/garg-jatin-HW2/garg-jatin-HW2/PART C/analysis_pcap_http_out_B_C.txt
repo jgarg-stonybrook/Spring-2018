@@ -1,0 +1,18 @@
+Total TCP Flows Initiated from Seneder 172.24.19.53 are: 17
+Total Data(Bytes) from client side is: 93498
+Total Number of Packets from client side is : 1296
+Total Time taken to load page is : 0.3844270706176758
+
+
+Total TCP Flows Initiated from Seneder 172.24.19.53 are: 6
+Total Data(Bytes) from client side is: 79990
+Total Number of Packets from client side is : 1056
+Total Time taken to load page is : 5.380983829498291
+
+
+Total TCP Flows Initiated from Seneder 172.24.19.53 are: 1
+Total Data(Bytes) from client side is: 39855
+Total Number of Packets from client side is : 574
+Total Time taken to load page is : 5.518625020980835
+
+

@@ -1,0 +1,1 @@
+cmd_/usr/src/hw1-jgarg/hw1/sys_xdedup.ko := ld -r -m elf_x86_64 -T ./scripts/module-common.lds --build-id  -o /usr/src/hw1-jgarg/hw1/sys_xdedup.ko /usr/src/hw1-jgarg/hw1/sys_xdedup.o /usr/src/hw1-jgarg/hw1/sys_xdedup.mod.o

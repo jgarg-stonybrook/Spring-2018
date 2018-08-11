@@ -1,0 +1,11 @@
+R1 iptables -t nat -A POSTROUTING -o R1-eth0 -j MASQUERADE
+
+R2 iptables -t nat -A POSTROUTING -o R2-eth1 -j MASQUERADE
+
+R4 iptables -t nat -A POSTROUTING -o R4-eth0 -j MASQUERADE
+
+R1 iptables -t nat -A POSTROUTING -o R1-eth2 -j MASQUERADE
+
+R3 iptables -t nat -A POSTROUTING -o R3-eth0 -j MASQUERADE
+
+R4 iptables -t nat -A POSTROUTING -o R4-eth2 -j MASQUERADE

@@ -1,0 +1,6 @@
+R1 python R1RipLite.py &
+R4 python R4RipLite.py &
+H1 python H1RipLite.py &
+H2 python H2RipLite.py &
+R2 python R2RipLite.py &
+R3 python R3RipLite.py &

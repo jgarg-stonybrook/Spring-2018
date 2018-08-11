@@ -1,0 +1,95 @@
+Blank README for CSE-506 S'18
+
+*************** OPERATING SYSTEM - HW-2 **********************************
+
+*************** SGFS Stackable file system *******************************
+
+******************    DOCUMENTATION    ***********************************
+
+
+I am breifing my README file in following points:
+1.) Sgfs is a stackable fs which is mounted on top of other fs and we are
+	intercepting the calls from vfs to lower level fs in order to provide
+	different functionalities.
+
+2.) So when the user mounts sgfs on other, we have to create a .sg folder
+	at top of mount time. 
+	a.) So we first check if .sg is present as a file, if such is the case
+		we throw an error and don't allow mounting and we can not create
+		a folder with same name.
+	b.) So if .sg is already present as folder, we use that folder as our 
+		.sg folder. We treat .sg folder as special one. Read 4th point.
+	c.) If .sg is not present, we create a new .sg folder.
+	e.) At mounting if the user provides a key, we throw an error if the 
+		key length is not 16 as our cipher requires key of length 16.
+	f.) Otherwise we store the key, dentry of secure folder and path to it
+		in global structure are we may require it later.
+
+3.) After this, when user performs some unlink operation from outside .sg, 
+	we move it .sg folder and attaches time, date and user id of owner of
+	file so that we can use it later.
+	a.) If the key is provided then we encrypt the file, otherwise not.
+	b.) Encryption is done after moving to .sg as otherwise if we directly
+		do encryption it may expose the file for a very long time in case
+		of large files. So we first move to .sg and then encrypt it there.
+	c.) Partial case is handled such that if encryption fails, we delete
+		the file that we opened for writing encrypted data, otherwise we 
+		delete the un-encypted file that was made after we renamed original
+		file to .sg folder.
+	d.) However, we are providing deletion even if encryption fails because
+		user has demanded deletion of file and we keep that as a priority,
+		so even if encyption did not work somehow(rare case), we do allow
+		the file to remanin in .sg without encryption because our .sg is 
+		also secure in other ways as no other user would be able to view,
+		read, list or delete other user files from .sg folder. 
+
+4.) Special Permissions of .sg folder:
+	a.) It is creatd with 0777 permission as it is a special folder.
+	b.) No one can delete this folder as it is special.
+	c.) Only root can change the permission of .sg as it is special.
+	d.) We assume, if .sg is already present at mounting, then only we have
+		created this folder as it is a special folder.
+
+5.) Encryption algorithm used is blkcipher with IV and Key.
+
+6.) Root has permission to list all files inside .sg, delete any file from
+	.sg, undelete any file .sg, do cat(1) and stat(1) on any file.
+
+7.) Other users wont be able to cat(1), stat(1), ls in .sg folder, delete,
+	unlink other user files. .sg will be a perfect jail from othem.
+	Even Tab wont list suggestions for other user files.
+
+8.) IOCTL : Supported an IOCTL to undelete a file owned by that user only.
+	a.) We first decrypt a file if the file is encrypted with the key of
+		user with which he is currently mounted. If it does not match,
+		no undelete is performed.
+	b.) If the file is not encrypted, the file is moved to cwd.
+	c.) The file is decrypted in same .sg folder after which it is renamed
+		to cwd. If decryption fails, the file remains there.
+	d.) Now if the cwd directory already contains a file with same name
+		that is going to be moved to cwd, then we start attaching -1-,
+		-2- etc in front of it and then move it to cwd. This way we can
+		move files to cwd irrespective of their name.
+	e.) We decrypt in .sg only as we dont want to expose file for so long
+		till it is decrypted completely.
+
+9.) Commenst are provided in top of functions, not inside to keep them clean.
+	Other info and logic is explained here.
+
+10.) Files submitted in HW-2
+	a.) sgctl.c : user land code to issue ioctl.
+	b.) Makefile : to compile user land code
+	c.) common_ioctl.h : Header file for user land code
+	d.) No files added in fs/sgfs code
+
+11.) Code to mount/unmount fs:
+	a.) For unmount : umount -l /usr/src/hw2-jgarg/mnt/sgfs/
+	b.) To remove module : rmmod /usr/src/hw2-jgarg/fs/sgfs/sgfs.ko
+	c.) To insert module : insmod /usr/src/hw2-jgarg/fs/sgfs/sgfs.ko
+	d.) To mount : mount -t sgfs -o key=SecretKeySecretP /usr/src/hw2-jgarg/hw2/sgfs/ /mnt/sgfs/
+
+12.) References : References:
+	a.) https://elixir.bootlin.com/linux/v4.6/source/arch/x86/crypto/
+	b.) Cryptfs: A Stackable Vnode Level Encryption File System,
+   		Erez Zadok, Ion Badulescu, and Alex Shender Computer Science Department, Columbia University
+	c.) http://tuxthink.blogspot.com/2011/01/creating-ioctl-command.html

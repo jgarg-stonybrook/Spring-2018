@@ -1,0 +1,43 @@
+QUESTION SECTION:
+www.cs.stonybrook.edu IN A 
+
+ANSWER SECTION:
+www.cs.stonybrook.edu. 900 IN CNAME ec2-107-22-178-157.compute-1.amazonaws.com.
+ec2-107-22-178-157.compute-1.amazonaws.com. 604800 IN A 107.22.178.157
+
+Query time:   96  msec
+WHEN: , Mon Feb 19 18:06:52 2018
+MSG SIZE rcvd:  149
+
+
+
+
+QUESTION SECTION:
+cs.stonybrook.edu IN NS 
+
+ANSWER SECTION:
+cs.stonybrook.edu. 900 IN NS nocnoc.stonybrook.edu.
+cs.stonybrook.edu. 900 IN NS whoisthere.stonybrook.edu.
+cs.stonybrook.edu. 900 IN NS mewho.stonybrook.edu.
+
+Query time:   33  msec
+WHEN: , Mon Feb 19 18:07:20 2018
+MSG SIZE rcvd:  158
+
+
+
+
+QUESTION SECTION:
+cs.stonybrook.edu IN MX 
+
+ANSWER SECTION:
+cs.stonybrook.edu. 900 IN MX 10 aspmx3.googlemail.com.
+cs.stonybrook.edu. 900 IN MX 10 aspmx2.googlemail.com.
+cs.stonybrook.edu. 900 IN MX 5 alt2.aspmx.l.google.com.
+cs.stonybrook.edu. 900 IN MX 5 alt1.aspmx.l.google.com.
+cs.stonybrook.edu. 900 IN MX 2 aspmx.l.google.com.
+
+Query time:   40  msec
+WHEN: , Mon Feb 19 18:07:31 2018
+MSG SIZE rcvd:  272
+

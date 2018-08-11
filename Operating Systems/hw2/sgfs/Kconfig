@@ -1,0 +1,6 @@
+config SG_FS
+	tristate "Sgfs stackable file system (EXPERIMENTAL - HW-2)"
+	help
+	  Sgfs is a stackable file system which is called as secure
+	  garbage file system.  It is designed as part of 
+	  HW - 2 for the course CSE-506.
