@@ -1,0 +1,76 @@
+import logging
+import random
+import hashlib
+import time
+
+class Resolver(process):
+    def setup(process_id, m, node_descs, workload, kde):
+        self._process_id = process_id
+        self._m = m
+        self._node_descs = node_descs
+
+        self._workload = workload
+
+        self._query_count = 0
+        self._start_times = dict()
+        self._end_times = dict()
+        self._resolution_latencies = set()
+        self._kde = kde
+        self._hops = 0
+        self._sleep_time = 0
+        self._namesList = list()
+
+    def run():
+        output(self._process_id, " (resolver) is online.")
+        for name in self._workload:
+            self._resolve(name)
+        await(False)
+
+    def _resolve(name):
+        #  Resolve a request for a name by finding the node for which the given request maps to
+        node_desc = random.choice(self._node_descs)
+        self._query_count += 1
+        query = {
+            'key': name,
+            'id': self._calculate_id(name, self._m),
+            'request_id': self._next_request_id(),
+            'client': self._process_id,
+            'hops': self._hops,
+            'sleepTime': self._sleep_time,
+            'hops_name_list': self._namesList
+        }
+        self._start_times[query['request_id']] = time.time()
+
+        send(('find_successor', query), to=node_desc[1])
+        output('Sent find_successor message for query: {q} to {node}'.format(q=query, node=node_desc))
+        await(query['request_id'] in self._end_times)
+
+    def receive(msg=('successor', query, successor)):
+        #  Once the successor(owner) of the key is found, lookup the key's value.
+
+        sleepTime = self._kde.sample(1)
+        query['sleepTime'] += sleepTime[0] / 2000
+        send(('get', query), to=successor[1])
+        output('Sent get to: ', successor)
+
+    def receive(msg=('result', query, result, authority)):
+        #  Display the result obtained for a particular query
+        sleepTime = self._kde.sample(1)
+        query['sleepTime'] += sleepTime[0] / 2000
+        self._end_times[query['request_id']] = time.time()
+        output('Result of query for {query} = {ipaddr}'.format(query=query['key'], ipaddr=result))
+        self._resolution_latencies.add((self._end_times[query['request_id']] - self._start_times[query['request_id']]))
+        output('{key}, {sleepTime}, {resTime}, {hops}, {nodesList}'.
+               format(key=query['key'], hops=query['hops'], sleepTime=int(round(query['sleepTime'][0] * 1000, 0)),
+                      resTime=int(
+                          round((self._end_times[query['request_id']] - self._start_times[query['request_id']]) * 1000,
+                                0)),
+                      nodesList=query['hops_name_list']), level=logging.DEBUG)
+
+    def _calculate_id(key, m):
+        h = int(hashlib.sha1(key.encode('utf-8')).hexdigest(), 16)
+        id = h % (1 << m)
+        return id
+
+    def _next_request_id():
+        return str(self._process_id) + '-' + str(self._query_count)
